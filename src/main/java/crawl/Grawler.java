@@ -154,7 +154,18 @@ public class Grawler
 		ArrayList<String> ci_list=new ArrayList<String>();
 		
 		 String pinyin=FileName2Pinyin.convertHanzi2PinyinStr(movie_name);
-		File movieFolder=new File("/mnt/nfs/nas179/rideo/"+pinyin);
+		 
+		 
+		 java.util.Properties prop=new 	java.util.Properties();
+		 try {
+			prop.load(new FileInputStream("./config"));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		//File movieFolder=new File("/mnt/nfs/nas179/rideo/"+pinyin);
+		
+		File movieFolder=new File(prop.getProperty("movieFolder")+pinyin);
 		 //File movieFolder=new File("/rideo/"+pinyin);
 		  if(!movieFolder.exists())
 		  {

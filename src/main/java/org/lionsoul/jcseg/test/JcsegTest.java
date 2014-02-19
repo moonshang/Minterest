@@ -1,6 +1,7 @@
 package org.lionsoul.jcseg.test;
 
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import java.io.StringReader;
@@ -23,10 +24,25 @@ public class JcsegTest {
 	
 	ISegment seg = null;
 	
-	public JcsegTest() throws JcsegException, IOException {
-		
+	public JcsegTest() throws JcsegException, IOException 
+	{
+		 java.util.Properties prop=new 	java.util.Properties();
+		 try {
+			prop.load(new FileInputStream("./config"));
+		} catch (IOException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		//JcsegTaskConfig config = new JcsegTaskConfig();
-		JcsegTaskConfig config = new JcsegTaskConfig("/home/lifanguo/jcseg.properties"); 
+		 JcsegTaskConfig config=null;
+		 if(prop.contains("JcsegTaskConfig"))
+		 {
+		 config = new JcsegTaskConfig(prop.getProperty("JcsegTaskConfig")); 
+		 }
+		 else
+		 {
+			config = new JcsegTaskConfig();
+		 }
 		//JcsegTaskConfig config = new JcsegTaskConfig(null);
 		//reset the options from a property file.
 		//config.resetFromPropertyFile("/java/JavaSE/jcseg/jcseg.properties");

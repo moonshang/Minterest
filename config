@@ -1,2 +1,9 @@
 threshold=0.02
 number=10
+#movieFolder=/mnt/nfs/nas179/rideo/
+movieFolder=/rideo/
+JcsegTaskConfig=/home/lifanguo/jcseg.properties
+mysql=jdbc:mysql://localhost:3306/howNet?useUnicode=true&characterEncoding=UTF-8
+root=root
+password=glf1030
+#password=111111

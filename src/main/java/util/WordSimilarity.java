@@ -3,6 +3,8 @@
  */
 package util;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -44,8 +46,19 @@ public class WordSimilarity {
 	public void connDB(){
 		try{
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
+			 java.util.Properties prop=new 	java.util.Properties();
+			 try {
+				prop.load(new FileInputStream("./config"));
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
+			String mysqlConfig=prop.getProperty("mysql");
+			String userName=prop.getProperty("root");
+			String passWord=prop.getProperty("password");
 		//	conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/howNet?useUnicode=true&characterEncoding=UTF-8","root","glf1030");
-	     conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/HowNet?useUnicode=true&characterEncoding=UTF-8","root","111111");
+	     conn = (Connection) DriverManager.getConnection(mysqlConfig,userName,passWord);
 
 			//System.out.println("Successfully Connect to the Database!");
 		}catch(Exception e){
