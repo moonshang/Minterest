@@ -164,8 +164,9 @@ public class Grawler
 			e2.printStackTrace();
 		}
 		//File movieFolder=new File("/mnt/nfs/nas179/rideo/"+pinyin);
-		
-		File movieFolder=new File(prop.getProperty("movieFolder")+pinyin);
+		File movieFolder=new File("/mnt/nfs/nas179/rideo_Minterest/"+pinyin);
+		 
+		//File movieFolder=new File(prop.getProperty("movieFolder")+pinyin);
 		 //File movieFolder=new File("/rideo/"+pinyin);
 		  if(!movieFolder.exists())
 		  {
