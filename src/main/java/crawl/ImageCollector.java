@@ -363,6 +363,7 @@ public class ImageCollector {
 				continue;
 			}
 			
+			if(image == null)continue;
 			int width = image.getWidth(null);
 			int height = image.getHeight(null);
 //			int length = conn.getContentLength();
