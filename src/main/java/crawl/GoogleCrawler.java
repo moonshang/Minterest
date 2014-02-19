@@ -10,9 +10,13 @@ import java.util.concurrent.BlockingQueue;
 
 
 
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 
 
@@ -158,7 +162,11 @@ class Producer implements Runnable
 //Consumer Class in Java
 class Consumer implements Runnable
 {
-	int maxiumaThreadN=10;
+	
+	int corePoolSize=10;
+	int maxiumPoolSize=100;
+	long keepLiveTime=1000*60;
+	
 
 
 	ArrayList<Future<String>> futureList=new ArrayList<Future<String>>();
@@ -178,8 +186,9 @@ class Consumer implements Runnable
 
 	public synchronized void run() 
 	{
-		ExecutorService threadPool = Executors.newFixedThreadPool(maxiumaThreadN);
+	//	ExecutorService threadPool = Executors.newFixedThreadPool(maxiumaThreadN);
 
+		ExecutorService threadPool=new ThreadPoolExecutor(corePoolSize, maxiumPoolSize, keepLiveTime, TimeUnit.SECONDS, new LinkedBlockingDeque<Runnable>(), new ThreadPoolExecutor.CallerRunsPolicy());    
 
 		while(true)
 		{
