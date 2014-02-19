@@ -42,9 +42,9 @@ import util.URLEncoding;
 
 
 
-public class RSSCrawler 
+public class Grawler 
 {  
-	final static Log log = LogFactory.getLog(RSSCrawler.class);
+	final static Log log = LogFactory.getLog(Grawler.class);
 	Vector<String> taskTrackQueue=null;
 	double threashold;
 	int number_limit;
@@ -56,7 +56,7 @@ public class RSSCrawler
 	
 	
 	
-	public RSSCrawler()
+	public Grawler()
 	{
 		 java.util.Properties prop=new 	java.util.Properties();
 		 try {

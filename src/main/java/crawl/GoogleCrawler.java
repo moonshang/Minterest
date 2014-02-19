@@ -68,7 +68,7 @@ public class GoogleCrawler
 class Producer implements Runnable 
 {
 
-	RSSCrawler crawler = new RSSCrawler();
+	Grawler crawler = new Grawler();
 
 	private final BlockingQueue<String> sharedQueue;
 	private final BlockingQueue<Boolean> taskMonitorQueue;
