@@ -42,6 +42,8 @@ public class TaoBaoCrawler {
 	MovieQueryFactory mqf=new MovieQueryFactory("./movieList");
 	int number_pages=5;
 	int number_items=40;
+	String src="src";
+	String data_src="data-src";
 	public static void main(String[] args) 
 	{
 	
@@ -63,6 +65,7 @@ public class TaoBaoCrawler {
 		{
 			try {
 				ArrayList<String> list=crawlWithQuery(q);
+				System.out.println(list.size());
 				for(String e:list)
 					System.out.println(e);
 			} catch (FailingHttpStatusCodeException e) {
@@ -90,7 +93,6 @@ public class TaoBaoCrawler {
 		{
 			for(int i=0;i<number_pages;i++)
 			{
-			
 				for(String m:mqf.getQuery())
 				{
 				String query=query_prefix+URLEncoding.encode(m+q)+query_postfix+i*number_items;
@@ -110,24 +112,41 @@ public class TaoBaoCrawler {
     	webClient.setRefreshHandler(new ThreadedRefreshHandler());
     	webClient.setAjaxController(new AjaxController());
     	webClient.setTimeout(WEB_CLIENT_TIMEOUT);
-    	HtmlPage	htmlPage = webClient.getPage(query);
+    	HtmlPage htmlPage = webClient.getPage(query);
     	Document doc = Jsoup.parse(htmlPage.asXml());
     	//System.out.println(doc);
     	Elements e=doc.select("[class=item-box]");
     	for(Element ele:e)
-    	{
+    	{  
     		System.out.println(ele.text());
     		Elements eles=ele.select("[trace=auction]");
     		if(eles.size()>0)
+    		{
     	    System.out.println(eles.get(0).attr("href"));
-    		HtmlPage singleHtmlPage=webClient.getPage(eles.get(0).attr("href"));
-    		Document singleDoc=Jsoup.parse(singleHtmlPage.asXml());
-    		
-    		Elements single_eles=singleDoc.select("[id=J_ImgBooth]");
-    		System.out.println(single_eles.size());
-    		System.out.println(single_eles.get(0).attr("src"));
-    		imageURL.add(single_eles.get(0).attr("src"));
+    	   String image_url = null;
+		try {
+			image_url = retrievalImageFromSingleLink(eles.get(0).attr("href"));
+			System.out.println(image_url);
+		} catch (NoSuchMethodException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (ScriptException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (InterruptedException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		    if(image_url!=null)
+    		imageURL.add(image_url);
     	
+    		}
+    		try {
+				Thread.sleep(1000*2);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
     	}
     	return imageURL;
     	
@@ -139,9 +158,41 @@ public class TaoBaoCrawler {
 		return null;
 	}
 	
-	private ArrayList<String> retrievalImageBatch(String singleLink) throws NoSuchMethodException, ScriptException
+	private String retrievalImageFromSingleLink(String singleLink) throws NoSuchMethodException, ScriptException, InterruptedException
 	{
-		return TaoBaoTaoBaoCrawlerSingleWebCrawlerSingleWeb.crawlSinglePage(singleLink);
+		try {
+			String s=TaoBaoCrawlerSingleWebCrawlerSingleWeb.crawlSinglePage(singleLink,src);
+			if(s!=null)
+			{
+				if(s.length()>2)
+				{
+					//System.out.println(src);
+					return s;
+				}
+				else
+				{
+					//System.out.println(data_src);
+					s=TaoBaoCrawlerSingleWebCrawlerSingleWeb.crawlSinglePage(singleLink,data_src);
+					return s;
+				}
+			
+			}
+
+		} catch (FailingHttpStatusCodeException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+		
 	}
 	
 	private Boolean imageLocalizer(ArrayList<String> imageList)
