@@ -12,7 +12,7 @@ public class URLEncoding {
     {
         try { 
             String codes=URLEncoder.encode(keyword, "UTF-8"); 
-            System.out.println(codes); 
+            //System.out.println(codes); 
          
             return codes;
         } catch (UnsupportedEncodingException e) 
