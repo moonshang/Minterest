@@ -236,7 +236,8 @@ public class ImageCollector {
 			this.text = text;
 		}
 	}
-	public ArrayList<ExternalImage> saveExternalImage(String surl, String outpath, WebContent content){
+	public ArrayList<ExternalImage> saveExternalImage(String surl, String outpath, WebContent content)
+	{
 		log.info(Thread.currentThread().getName()+"\tis parsing "+ surl);
 		ArrayList<ExternalImage> results = new ArrayList<ExternalImage>();
 		
@@ -793,7 +794,8 @@ public class ImageCollector {
 		}
 	}
 	
-	public void testLink(String link){
+	public void testLink(String link)
+	{
 		saveExternalImage(link, "./test", new WebContent());
 		
 	}
@@ -820,9 +822,9 @@ public class ImageCollector {
 //		ImageCollector collector = new ImageCollector("");
 //		collector.testLink(link);
 		
-		String dir = "xiaoshidai/picao";
-		ImageCollector collector = new ImageCollector();
-		collector.singleStart(dir);
+//		String dir = "xiaoshidai/picao";
+//		ImageCollector collector = new ImageCollector();
+//		collector.singleStart(dir);
 		
 	}
 	

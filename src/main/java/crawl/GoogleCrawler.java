@@ -10,7 +10,6 @@ import java.util.concurrent.BlockingQueue;
 
 
 
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -38,7 +37,7 @@ import org.apache.log4j.Logger;
 
 public class GoogleCrawler 
 {
-	Logger log=Logger.getLogger(this.getClass());
+	
 
 	
 	public static void main(String[] args)
@@ -55,7 +54,7 @@ public class GoogleCrawler
 	
 	public static void crawler() throws InterruptedException
 	{
-
+		Logger taskLog=Logger.getLogger("task");
 		ExecutorService service = Executors.newCachedThreadPool();  
 		//Creating shared object
 		BlockingQueue<String> sharedQueue = new LinkedBlockingQueue<String>();
@@ -73,6 +72,7 @@ public class GoogleCrawler
 		service.submit(consThread);
 
 		service.shutdown();
+		taskLog.info("main thread is shutdown");
 
 	}
 
@@ -85,6 +85,7 @@ public class GoogleCrawler
 class Producer implements Runnable 
 {
 
+	Logger taskLog=Logger.getLogger("task");
 	Grawler crawler = new Grawler();
 
 	private final BlockingQueue<String> sharedQueue;
@@ -134,7 +135,8 @@ class Producer implements Runnable
 				ArrayList<String> movieGoogleSearch=crawler.crawler_google_image_htmlFormat(sf.format(date),movieName);
 				for(int j=0;j<movieGoogleSearch.size();j++)
 				{
-					System.out.println("I am puting "+ movieGoogleSearch.get(j));
+					System.out.println("I am putting "+ movieGoogleSearch.get(j));
+					taskLog.info("I am putting"+movieGoogleSearch.get(j));
 					sharedQueue.put(movieGoogleSearch.get(j));
 				}
 
@@ -152,6 +154,7 @@ class Producer implements Runnable
 			e.printStackTrace();
 		}
 
+		taskLog.info("Producer has finished");
 		System.out.println("Producer has finished");
 
 	}
@@ -162,9 +165,10 @@ class Producer implements Runnable
 //Consumer Class in Java
 class Consumer implements Runnable
 {
-	
-	int corePoolSize=10;
-	int maxiumPoolSize=100;
+	Logger taskLog=Logger.getLogger("task");
+
+	int corePoolSize=5;
+	int maxiumPoolSize=10;
 	long keepLiveTime=1000*60;
 	
 
@@ -226,6 +230,7 @@ class Consumer implements Runnable
 				{
 					public void run()
 					{
+						taskLog.info("Consuming:"+folderName);
 						System.out.println("Consuming "+folderName);
 						Test1 t=new Test1(folderName);
 						try {
@@ -326,6 +331,7 @@ class Consumer implements Runnable
 
 
 		}
+		taskLog.info("Consumer has finished");
 		System.out.println("Consumer has finished");
 		threadPool.shutdown();
 //		notifyAll();
@@ -335,6 +341,7 @@ class Consumer implements Runnable
 
 class Test1
 {
+	Logger taskLog=Logger.getLogger("task");
 	String fileName="";
 	public  Test1(String s)
 	{
@@ -343,12 +350,12 @@ class Test1
 
 	public synchronized void r() throws InterruptedException
 	{
-
+		taskLog.info(fileName+"is working");
 		System.out.println(fileName+"is working");
-		   ImageCollector ic=new ImageCollector();
-		   ic.singleStart(fileName);
-		
-
+//		   ImageCollector ic=new ImageCollector();
+//		   ic.singleStart(fileName);
+		Thread.sleep(6000);
+		taskLog.info(fileName+" has finished");
 		System.out.println(fileName);
 
 	}

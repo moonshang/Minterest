@@ -59,7 +59,7 @@ public class WordSimilarity {
 			String passWord=prop.getProperty("password");
 			//System.out.println(mysqlConfig+userName+passWord);
 			
-			conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/HowNet?useUnicode=true&characterEncoding=UTF-8","root","111111");
+			conn = (Connection) DriverManager.getConnection("jdbc:mysql://192.168.1.55:3306/HowNet?useUnicode=true&characterEncoding=UTF-8","root","111111");
 	    // conn = (Connection) DriverManager.getConnection(mysqlConfig,userName,passWord);
 
 			//System.out.println("Successfully Connect to the Database!");

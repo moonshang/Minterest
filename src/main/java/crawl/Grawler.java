@@ -163,15 +163,15 @@ public class Grawler
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		//File movieFolder=new File("/mnt/nfs/nas179/rideo/"+pinyin);
-		File movieFolder=new File("/mnt/nfs/nas179/rideo_Minterest/"+pinyin);
+		File movieFolder=new File("/mnt/nfs/nas179/rideo/"+pinyin);
+		//File movieFolder=new File("/mnt/nfs/nas179/rideo_Minterest/"+pinyin);
 		 
 		//File movieFolder=new File(prop.getProperty("movieFolder")+pinyin);
 		 //File movieFolder=new File("/rideo/"+pinyin);
 		  if(!movieFolder.exists())
 		  {
 			  System.out.println(movieFolder.getAbsolutePath());
-			  movieFolder.mkdir();
+			  movieFolder.mkdirs();
 		  }
 		  
 		
@@ -204,7 +204,7 @@ public class Grawler
 			       String keyword_folder=movieFolder.getAbsolutePath()+"/"+keyword_pinyin;
 			       
 			       if(!new File(keyword_folder).exists())
-			    	   new File(keyword_folder).mkdir();
+			    	   new File(keyword_folder).mkdirs();
 			       
 			       File configFile=new File(keyword_folder+"/"+"config");
 					  if(!configFile.exists())
