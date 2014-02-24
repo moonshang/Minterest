@@ -33,10 +33,10 @@ public class JcsegTest {
 //			// TODO Auto-generated catch block
 //			e2.printStackTrace();
 //		}
-		//JcsegTaskConfig config = new JcsegTaskConfig();
-		//JcsegTaskConfig config = new JcsegTaskConfig("/home/lifanguo/jcseg.properties"); 
+	//	JcsegTaskConfig config = new JcsegTaskConfig();
+		JcsegTaskConfig config = new JcsegTaskConfig("/home/lifanguo/jcseg.properties"); 
 
-		JcsegTaskConfig config = new JcsegTaskConfig("/home/lifanguo/jcseg.properties");
+	//	JcsegTaskConfig config = new JcsegTaskConfig("/home/lifanguo/jcseg.properties");
 		//JcsegTaskConfig config = new JcsegTaskConfig();
 //		 JcsegTaskConfig config=null;
 //		 if(prop.containsKey(("JcsegTaskConfig")))

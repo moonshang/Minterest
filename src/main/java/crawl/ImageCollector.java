@@ -261,13 +261,13 @@ public class ImageCollector {
 			htmlPage = webClient.getPage(surl);
 		}catch(MalformedURLException e){
 			//if no URL can be created from the provided string
-			warn.warn(Thread.currentThread().getName()+e.getMessage()+"\tif no URL can be created from the provided string");
+			warn.warn(Thread.currentThread().getName()+"\t"+e.getMessage()+"\tNo URL can be created from the provided string:"+surl);
 			return results;
 		}catch(IOException e){
-			warn.warn(Thread.currentThread().getName()+e.getMessage()+"\t"+Arrays.toString(e.getStackTrace()));
+			warn.warn(Thread.currentThread().getName()+"\t"+e.getMessage()+"\tIOException when reading URL:"+surl);
 			return results;
 		}catch(FailingHttpStatusCodeException e){
-			warn.warn(Thread.currentThread().getName()+e.getMessage()+"\tFail to access the server.");
+			warn.warn(Thread.currentThread().getName()+"\t"+e.getMessage()+"\tFail to access the server.URL:"+surl);
 			return results;
 		}
     	
@@ -360,7 +360,7 @@ public class ImageCollector {
 				warn.warn(Thread.currentThread().getName()+"\tRead source timeout:"+src+"\t"+e.getMessage());
 				continue;
 			}catch(IOException e){
-				warn.warn(Thread.currentThread().getName()+e.getCause());
+				warn.warn(Thread.currentThread().getName()+"\tIOException when reading URL:"+src);
 				continue;
 			}
 			
@@ -399,13 +399,13 @@ public class ImageCollector {
 					out.close();/*后面三行为关闭输入输出流以及网络资源的固定格式*/
 					dataInputStream.close();
 				}catch(MalformedURLException e){
-					warn.warn(Thread.currentThread().getName()+e.getMessage()+"\t"+Arrays.toString(e.getStackTrace()));
+					warn.warn(Thread.currentThread().getName()+e.getMessage()+"\tURL="+src);
 					continue;
 				}catch(FileNotFoundException e){
 					warn.warn(Thread.currentThread().getName()+e.getMessage()+"\tFile not found:"+savePath);
 					continue;
 				}catch(IOException e){
-					warn.warn(Thread.currentThread().getName()+e.getMessage()+"\t"+Arrays.toString(e.getStackTrace()));
+					warn.warn(Thread.currentThread().getName()+e.getMessage()+"\tIOException url="+src);
 					continue;
 				}finally{
 					conn.disconnect();
@@ -592,52 +592,11 @@ public class ImageCollector {
 						// TODO Auto-generated catch block
 						warn.warn(Thread.currentThread().getName()+"\t"+e.getCause());
 					}
-				} else if (externalImages.size() == 1) {
-					orig_pic_url = externalImages.get(0).url;
-					alt = externalImages.get(0).alt;
-					imageLocalAddr = externalImages.get(0).localAddr;
-				} else {
-					// condition: externalImages.size()>2
-					// Keyframe extraction
-					TreeMap<String, Integer> mapSorted = new TreeMap<String, Integer>();
-					mapSorted = RankImage.rankImage(targetImageAddr,imageFolderAddr);
-
-					// get the result
-					if (mapSorted.size() < 1) {
-						// keyframe extraction fail! we put the first image as
-						// the original one
-						orig_pic_url = externalImages.get(0).url;
-						alt = externalImages.get(0).alt;
-						imageLocalAddr = externalImages.get(0).localAddr;
-						warn.warn(Thread.currentThread().getName()+"KEYFRAME FAILED! " + imageLocalAddr);
-					} 
-					else {
-						// String matchfilename =
-						// mapSorted.keySet().iterator().next();
-						Iterator<Map.Entry<String, Integer>> it = mapSorted.entrySet().iterator();
-						Map.Entry<String, Integer> entry = it.next();
-//						entry = it.next();
-						String originalFileName = entry.getKey();
-//						
-						log.info(Thread.currentThread().getName()+" matched original file: "+originalFileName);
-						if(!originalFileName.contains(".")){
-							warn.warn(Thread.currentThread().getName()+"Invalid file name:"+originalFileName);
-							continue;
-						}
-						int fileindex = Integer.parseInt(originalFileName.substring(0,originalFileName.indexOf(".")));
-						if(fileindex<1){
-							warn.warn(Thread.currentThread().getName()+"Invalid file index:"+fileindex);
-							continue;
-						}
-						if(externalImages.size()<fileindex){
-							warn.warn(Thread.currentThread().getName()+"Invalid file name:"+originalFileName);
-							continue;
-						}
-						orig_pic_url = externalImages.get(fileindex-1).url;
-						alt = externalImages.get(fileindex-1).alt;
-						imageLocalAddr = imageFolderAddr + "/" + originalFileName;
-						keyframe = true;
-					}
+				}
+				else{
+					orig_pic_url = "";
+					alt = "";
+					imageLocalAddr = "";
 				}
 
 				// create json
@@ -822,9 +781,9 @@ public class ImageCollector {
 //		ImageCollector collector = new ImageCollector("");
 //		collector.testLink(link);
 		
-//		String dir = "xiaoshidai/picao";
-//		ImageCollector collector = new ImageCollector();
-//		collector.singleStart(dir);
+		String dir = "E:/crawlerdata/quanzhixian";
+		ImageCollector collector = new ImageCollector();
+		collector.singleStart(dir);
 		
 	}
 	

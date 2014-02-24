@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 import com.mysql.jdbc.Connection;
 
+import entity.GoogleImageItem;
 import entity.TaoBaoItem;
 
 
@@ -160,6 +161,7 @@ public class MysqlDatabase {
 		try
 		{
 			 String sql="select * from ContentDiary.movie where movie_name like'"+movie_name+"%'";
+			 System.out.println(sql);
 			 PreparedStatement stmt = conn.clientPrepareStatement(sql);
 			 ResultSet rs = stmt .executeQuery(sql);
 			 while(rs.next())
@@ -177,6 +179,49 @@ public class MysqlDatabase {
 	}
 	
 
+	
+	public void rankTopItems(int number_Top) throws SQLException
+	{
+		 String sql="SELECT distinct movie_name FROM Rideo.Published_ImRep_Wanying";
+		 System.out.println(sql);
+		 PreparedStatement stmt = conn.clientPrepareStatement(sql);
+		 ResultSet rs = stmt .executeQuery(sql);
+		 ArrayList<String> movieNameList=new ArrayList<String>();
+		 while(rs.next())
+		  { 
+			 movieNameList.add(rs.getString("movie_name"));
+		  }
+		 
+		 ArrayList<GoogleImageItem> itemList=new ArrayList<GoogleImageItem>();
+		 for(int i=0;i<movieNameList.size();i++)
+		 {
+			 String sqlUrl="SELECT DISTINCT(url),movie_name,movie_id,source,alt,local_add,`from`,title,`group` from Rideo.Published_ImRep_Wanying where movie_name='" +
+		 movieNameList.get(i)+"' group by url";
+			 System.out.println(sqlUrl);
+			 PreparedStatement stmtURL = conn.clientPrepareStatement(sql);
+			 ResultSet rsURL = stmtURL .executeQuery(sqlUrl);
+			 while(rsURL.next())
+			 {
+				 System.out.println(rsURL.getString("url"));
+				 System.out.println(rsURL.getString("movie_name"));
+				 System.out.println(rsURL.getString("movie_id"));
+				 System.out.println(rsURL.getString("source"));
+				 System.out.println(rsURL.getString("alt"));
+				 System.out.println(rsURL.getString("local_add"));
+				 System.out.println(rsURL.getString("from"));
+				 System.out.println(rsURL.getString("title"));
+				 System.out.println(rsURL.getInt("group"));
+				 GoogleImageItem gii=new GoogleImageItem();
+				 gii.set_image_add(rsURL.getString("local_add"));
+				
+				 break;
+			 }
+			 break;
+		 }
+	}
+	
+	
+	
 	public void close()
 	{
 		try {
@@ -187,13 +232,13 @@ public class MysqlDatabase {
 		}
 	}
 	
-	public static void main(String[] args)
+	public static void main(String[] args) throws SQLException
 	{
 		/*
 		 * success. 
 		 * test by lg
 		 */
 		MysqlDatabase mdb=new MysqlDatabase();
-		System.out.println(mdb.getMId("小时代2"));
+		mdb.rankTopItems(10);
 	}
 }

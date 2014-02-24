@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 
 
@@ -43,6 +44,7 @@ public class GoogleCrawler
 	public static void main(String[] args)
 	{
 		try {
+			PropertyConfigurator.configure("log4j.properties");
 			GoogleCrawler.crawler();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -167,8 +169,8 @@ class Consumer implements Runnable
 {
 	Logger taskLog=Logger.getLogger("task");
 
-	int corePoolSize=5;
-	int maxiumPoolSize=10;
+	int corePoolSize=50;
+	int maxiumPoolSize=100;
 	long keepLiveTime=1000*60;
 	
 
@@ -352,9 +354,9 @@ class Test1
 	{
 		taskLog.info(fileName+"is working");
 		System.out.println(fileName+"is working");
-//		   ImageCollector ic=new ImageCollector();
-//		   ic.singleStart(fileName);
-		Thread.sleep(6000);
+		   ImageCollector ic=new ImageCollector();
+		   ic.singleStart(fileName);
+		Thread.sleep(1000*60*10);
 		taskLog.info(fileName+" has finished");
 		System.out.println(fileName);
 

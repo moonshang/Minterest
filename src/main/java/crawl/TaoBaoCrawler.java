@@ -81,6 +81,8 @@ public class TaoBaoCrawler {
 		for(String m:mqf.getQuery())
 		{
 			String movie_id=msd.getMId(m);
+			System.out.println(m);
+			System.out.println(movie_id);
 			String movie_name=m;
 			
 			for(String q:kqf.getQuery())
