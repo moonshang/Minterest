@@ -1,0 +1,89 @@
+2014-02-23 15:11:24 INFO  task:77 - main thread is shutdown
+2014-02-23 15:11:26 INFO  task:141 - I am puttingD:\rideo\yedianbeijing/picao
+2014-02-23 15:11:26 INFO  task:141 - I am puttingD:\rideo\yedianbeijing/nuxie
+2014-02-23 15:11:26 INFO  task:235 - Consuming:D:\rideo\yedianbeijing/picao
+2014-02-23 15:11:26 INFO  task:355 - D:\rideo\yedianbeijing/picaois working
+2014-02-23 15:11:26 INFO  task:235 - Consuming:D:\rideo\yedianbeijing/nuxie
+2014-02-23 15:11:26 INFO  task:355 - D:\rideo\yedianbeijing/nuxieis working
+2014-02-23 15:11:28 INFO  task:141 - I am puttingD:\rideo\renzaijiongtuzhitaijiong/picao
+2014-02-23 15:11:28 INFO  task:141 - I am puttingD:\rideo\renzaijiongtuzhitaijiong/nuxie
+2014-02-23 15:11:28 INFO  task:235 - Consuming:D:\rideo\renzaijiongtuzhitaijiong/picao
+2014-02-23 15:11:28 INFO  task:355 - D:\rideo\renzaijiongtuzhitaijiong/picaois working
+2014-02-23 15:11:28 INFO  task:235 - Consuming:D:\rideo\renzaijiongtuzhitaijiong/nuxie
+2014-02-23 15:11:28 INFO  task:355 - D:\rideo\renzaijiongtuzhitaijiong/nuxieis working
+2014-02-23 15:11:32 INFO  task:360 - D:\rideo\yedianbeijing/picao has finished
+2014-02-23 15:11:32 INFO  task:360 - D:\rideo\yedianbeijing/nuxie has finished
+2014-02-23 15:11:34 INFO  task:360 - D:\rideo\renzaijiongtuzhitaijiong/picao has finished
+2014-02-23 15:11:34 INFO  task:360 - D:\rideo\renzaijiongtuzhitaijiong/nuxie has finished
+2014-02-23 15:13:37 INFO  task:77 - main thread is shutdown
+2014-02-23 15:15:39 INFO  task:141 - I am puttingD:\rideo\yedianbeijing/picao
+2014-02-23 15:15:39 INFO  task:141 - I am puttingD:\rideo\yedianbeijing/nuxie
+2014-02-23 15:15:39 INFO  task:235 - Consuming:D:\rideo\yedianbeijing/picao
+2014-02-23 15:15:39 INFO  task:355 - D:\rideo\yedianbeijing/picaois working
+2014-02-23 15:15:39 INFO  task:235 - Consuming:D:\rideo\yedianbeijing/nuxie
+2014-02-23 15:15:39 INFO  task:355 - D:\rideo\yedianbeijing/nuxieis working
+2014-02-23 15:17:40 INFO  task:141 - I am puttingD:\rideo\renzaijiongtuzhitaijiong/picao
+2014-02-23 15:17:40 INFO  task:141 - I am puttingD:\rideo\renzaijiongtuzhitaijiong/nuxie
+2014-02-23 15:19:44 INFO  task:141 - I am puttingD:\rideo\modengshidai/picao
+2014-02-23 15:19:44 INFO  task:141 - I am puttingD:\rideo\modengshidai/nuxie
+2014-02-23 15:19:44 INFO  task:159 - Producer has finished
+2014-02-23 15:19:44 INFO  task:336 - Consumer has finished
+2014-02-23 15:25:39 INFO  task:360 - D:\rideo\yedianbeijing/picao has finished
+2014-02-23 15:25:39 INFO  task:360 - D:\rideo\yedianbeijing/nuxie has finished
+2014-02-23 15:25:39 INFO  task:235 - Consuming:D:\rideo\renzaijiongtuzhitaijiong/nuxie
+2014-02-23 15:25:39 INFO  task:355 - D:\rideo\renzaijiongtuzhitaijiong/nuxieis working
+2014-02-23 15:25:39 INFO  task:235 - Consuming:D:\rideo\renzaijiongtuzhitaijiong/picao
+2014-02-23 15:25:39 INFO  task:355 - D:\rideo\renzaijiongtuzhitaijiong/picaois working
+2014-02-23 15:29:21 INFO  task:77 - main thread is shutdown
+2014-02-23 15:31:23 INFO  task:141 - I am puttingD:\rideo\yedianbeijing/picao
+2014-02-23 15:31:23 INFO  task:141 - I am puttingD:\rideo\yedianbeijing/nuxie
+2014-02-23 15:31:23 INFO  task:235 - Consuming:D:\rideo\yedianbeijing/picao
+2014-02-23 15:31:23 INFO  task:355 - D:\rideo\yedianbeijing/picaois working
+2014-02-23 15:31:23 INFO  task:235 - Consuming:D:\rideo\yedianbeijing/nuxie
+2014-02-23 15:31:23 INFO  task:355 - D:\rideo\yedianbeijing/nuxieis working
+2014-02-23 15:31:25 INFO  task:141 - I am puttingD:\rideo\renzaijiongtuzhitaijiong/picao
+2014-02-23 15:31:25 INFO  task:141 - I am puttingD:\rideo\renzaijiongtuzhitaijiong/nuxie
+2014-02-23 15:33:28 INFO  task:141 - I am puttingD:\rideo\modengshidai/picao
+2014-02-23 15:33:28 INFO  task:141 - I am puttingD:\rideo\modengshidai/nuxie
+2014-02-23 15:33:28 INFO  task:159 - Producer has finished
+2014-02-23 15:41:23 INFO  task:360 - D:\rideo\yedianbeijing/picao has finished
+2014-02-23 15:41:23 INFO  task:235 - Consuming:D:\rideo\renzaijiongtuzhitaijiong/picao
+2014-02-23 15:41:23 INFO  task:360 - D:\rideo\yedianbeijing/nuxie has finished
+2014-02-23 15:41:23 INFO  task:235 - Consuming:D:\rideo\renzaijiongtuzhitaijiong/nuxie
+2014-02-23 15:41:23 INFO  task:355 - D:\rideo\renzaijiongtuzhitaijiong/nuxieis working
+2014-02-23 15:41:23 INFO  task:355 - D:\rideo\renzaijiongtuzhitaijiong/picaois working
+2014-02-23 15:51:23 INFO  task:360 - D:\rideo\renzaijiongtuzhitaijiong/nuxie has finished
+2014-02-23 15:51:23 INFO  task:360 - D:\rideo\renzaijiongtuzhitaijiong/picao has finished
+2014-02-23 15:51:23 INFO  task:235 - Consuming:D:\rideo\modengshidai/picao
+2014-02-23 15:51:23 INFO  task:235 - Consuming:D:\rideo\modengshidai/nuxie
+2014-02-23 15:51:23 INFO  task:355 - D:\rideo\modengshidai/nuxieis working
+2014-02-23 15:51:23 INFO  task:355 - D:\rideo\modengshidai/picaois working
+2014-02-23 16:01:23 INFO  task:360 - D:\rideo\modengshidai/nuxie has finished
+2014-02-23 16:01:23 INFO  task:360 - D:\rideo\modengshidai/picao has finished
+2014-02-23 16:46:47 INFO  task:77 - main thread is shutdown
+2014-02-23 16:48:49 INFO  task:141 - I am puttingD:\rideo\yedianbeijing/picao
+2014-02-23 16:48:49 INFO  task:141 - I am puttingD:\rideo\yedianbeijing/nuxie
+2014-02-23 16:48:49 INFO  task:235 - Consuming:D:\rideo\yedianbeijing/picao
+2014-02-23 16:48:49 INFO  task:355 - D:\rideo\yedianbeijing/picaois working
+2014-02-23 16:48:50 INFO  task:141 - I am puttingD:\rideo\renzaijiongtuzhitaijiong/picao
+2014-02-23 16:48:50 INFO  task:141 - I am puttingD:\rideo\renzaijiongtuzhitaijiong/nuxie
+2014-02-23 16:50:54 INFO  task:141 - I am puttingD:\rideo\modengshidai/picao
+2014-02-23 16:50:54 INFO  task:141 - I am puttingD:\rideo\modengshidai/nuxie
+2014-02-23 16:50:54 INFO  task:159 - Producer has finished
+2014-02-23 16:50:54 INFO  task:336 - Consumer has finished
+2014-02-23 16:58:49 INFO  task:360 - D:\rideo\yedianbeijing/picao has finished
+2014-02-23 16:58:49 INFO  task:235 - Consuming:D:\rideo\yedianbeijing/nuxie
+2014-02-23 16:58:49 INFO  task:355 - D:\rideo\yedianbeijing/nuxieis working
+2014-02-23 17:08:49 INFO  task:360 - D:\rideo\yedianbeijing/nuxie has finished
+2014-02-23 17:08:49 INFO  task:235 - Consuming:D:\rideo\renzaijiongtuzhitaijiong/picao
+2014-02-23 17:08:49 INFO  task:355 - D:\rideo\renzaijiongtuzhitaijiong/picaois working
+2014-02-23 17:18:49 INFO  task:360 - D:\rideo\renzaijiongtuzhitaijiong/picao has finished
+2014-02-23 17:18:49 INFO  task:235 - Consuming:D:\rideo\renzaijiongtuzhitaijiong/nuxie
+2014-02-23 17:18:49 INFO  task:355 - D:\rideo\renzaijiongtuzhitaijiong/nuxieis working
+2014-02-23 17:28:49 INFO  task:360 - D:\rideo\renzaijiongtuzhitaijiong/nuxie has finished
+2014-02-23 17:28:49 INFO  task:235 - Consuming:D:\rideo\modengshidai/picao
+2014-02-23 17:28:49 INFO  task:355 - D:\rideo\modengshidai/picaois working
+2014-02-23 17:38:49 INFO  task:360 - D:\rideo\modengshidai/picao has finished
+2014-02-23 17:38:49 INFO  task:235 - Consuming:D:\rideo\modengshidai/nuxie
+2014-02-23 17:38:49 INFO  task:355 - D:\rideo\modengshidai/nuxieis working
+2014-02-23 17:48:49 INFO  task:360 - D:\rideo\modengshidai/nuxie has finished
