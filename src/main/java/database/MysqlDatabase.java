@@ -10,18 +10,22 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+
 
 
 
 import com.mysql.jdbc.Connection;
 
 import entity.GoogleImageItem;
+import entity.MovieItem;
+import entity.RideoItem;
 import entity.TaoBaoItem;
 
 
 public class MysqlDatabase {
 
-	
+	Logger taskLog=Logger.getLogger("database");
 	static String driver = "com.mysql.jdbc.Driver";
 
 	public static Connection conn =null;
@@ -36,7 +40,7 @@ public class MysqlDatabase {
 		if(conn==null)
 		{
 			
-			conn = (Connection) DriverManager.getConnection("jdbc:mysql://192.168.1.55:3306/Rideo?useUnicode=true&characterEncoding=gb2312","root","111111");
+			conn = (Connection) DriverManager.getConnection("jdbc:mysql://192.168.1.55:3306/Rideo?useUnicode=true&characterEncoding=gbk","root","111111");
 		
 		//	conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ContentDiary?useUnicode=true&characterEncoding=UTF-8","root","111111");
 			
@@ -117,9 +121,9 @@ public class MysqlDatabase {
 	}
 
 	
-	public HashMap<String,String[]> batchsearchMovieDataFromMysql()
+	public ArrayList<MovieItem> batchsearchMovieDataFromMysql()
 	{
-		 HashMap<String, String[]> movieData=new HashMap<String,String[]>();
+		ArrayList<MovieItem> miList=new ArrayList<MovieItem>();
 		
 		 try
 		 {
@@ -130,19 +134,13 @@ public class MysqlDatabase {
 			  
 			  while(rs.next())
 			  { 
-				  
-			   String  movie_name=rs.getString("movie_name");
-			   String  movie_id=rs.getString("movie_id");
-			   String  movie_actors=rs.getString("actor_list");
-			   String  movie_director=rs.getString("director");
 			   
-			   String[] list={movie_id,movie_director,movie_actors};
-			   movieData.put(movie_name,list);
-	           System.out.println(rs.getString("movie_name"));
-	           System.out.println(rs.getString("movie_id"));
-	              
-	        
-	              
+			   MovieItem mi=new MovieItem();
+			   mi.set_movie_name(rs.getString("movie_name"));
+			   mi.set_movie_id(rs.getString("movie_id"));
+			   mi.set_director(rs.getString("director"));
+			   mi.set_actor_list((rs.getString("actor_list").split(";")));
+			   miList.add(mi);
 			  }
 		 }
 		 catch(Exception e)
@@ -151,74 +149,92 @@ public class MysqlDatabase {
 		 }
 		 
 		
-		return movieData;
+		return miList;
 	}
 
 	
-	public String getMId(String movie_name)
-	{
-		String movie_id=null;
-		try
-		{
-			 String sql="select * from ContentDiary.movie where movie_name like'"+movie_name+"%'";
-			 System.out.println(sql);
-			 PreparedStatement stmt = conn.clientPrepareStatement(sql);
-			 ResultSet rs = stmt .executeQuery(sql);
-			 while(rs.next())
-			  { 
-				  movie_id=rs.getString("movie_id");
 
-			  }
-		}
-		catch(Exception e)
-		{
+
+	public ArrayList<String>  getTaoBaoKeyWords()
+	{
+		ArrayList<String> taobaoKeywords=new ArrayList<String>();
+		
+		String sql="SELECT * FROM Minterest.TaoBaoQuery";
+		 PreparedStatement stmt;
+		try {
+			stmt = conn.clientPrepareStatement(sql);
+			ResultSet rs = stmt .executeQuery(sql);
+			while(rs.next())
+			{
+				taobaoKeywords.add(rs.getString("query"));
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	
+		 return taobaoKeywords;
 		
-		return movie_id;
 	}
-	
 
+	/*
+	 * true: 插入的数据，数据库里面并不存在
+	 * false: 插入的数据，数据库里面有。
+	 */
 	
-	public void rankTopItems(int number_Top) throws SQLException
+	public Boolean InsertLatestRecords(ArrayList<RideoItem> rideoItemList) throws SQLException 
 	{
-		 String sql="SELECT distinct movie_name FROM Rideo.Published_ImRep_Wanying";
-		 System.out.println(sql);
-		 PreparedStatement stmt = conn.clientPrepareStatement(sql);
-		 ResultSet rs = stmt .executeQuery(sql);
-		 ArrayList<String> movieNameList=new ArrayList<String>();
-		 while(rs.next())
-		  { 
-			 movieNameList.add(rs.getString("movie_name"));
-		  }
-		 
-		 ArrayList<GoogleImageItem> itemList=new ArrayList<GoogleImageItem>();
-		 for(int i=0;i<movieNameList.size();i++)
-		 {
-			 String sqlUrl="SELECT DISTINCT(url),movie_name,movie_id,source,alt,local_add,`from`,title,`group` from Rideo.Published_ImRep_Wanying where movie_name='" +
-		 movieNameList.get(i)+"' group by url";
-			 System.out.println(sqlUrl);
-			 PreparedStatement stmtURL = conn.clientPrepareStatement(sql);
-			 ResultSet rsURL = stmtURL .executeQuery(sqlUrl);
-			 while(rsURL.next())
-			 {
-				 System.out.println(rsURL.getString("url"));
-				 System.out.println(rsURL.getString("movie_name"));
-				 System.out.println(rsURL.getString("movie_id"));
-				 System.out.println(rsURL.getString("source"));
-				 System.out.println(rsURL.getString("alt"));
-				 System.out.println(rsURL.getString("local_add"));
-				 System.out.println(rsURL.getString("from"));
-				 System.out.println(rsURL.getString("title"));
-				 System.out.println(rsURL.getInt("group"));
-				 GoogleImageItem gii=new GoogleImageItem();
-				 gii.set_image_add(rsURL.getString("local_add"));
-				
-				 break;
-			 }
-			 break;
-		 }
+		 Boolean existed=false;
+		
+	    for(int i=0;i<rideoItemList.size();i++)
+	    {
+	    
+	    	RideoItem single_new=rideoItemList.get(i);
+	    	
+	    	String pid=single_new.getPID();
+	    	
+	    	String sql="select * from Minterest.Rideo_Initial where p_id='"+pid+"'";
+	    	 PreparedStatement stmt;
+	    	 stmt = conn.clientPrepareStatement(sql);
+				ResultSet rs = stmt .executeQuery(sql);
+				while(rs.next())
+				{
+					
+					existed=true;
+				}
+	    	 
+		    PreparedStatement stat=null;
+		
+			stat = conn.clientPrepareStatement("INSERT INTO Minterest.Rideo_Initial VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			stat.setInt(1, 0);
+			stat.setString(2, single_new.getPID()); 
+			stat.setString(3, single_new.getMID());
+			stat.setString(4, single_new.getPUrl()); 
+		    stat.setString(5,  single_new.getDes());
+			stat.setString(6, single_new.getSourceLink()); 
+			stat.setString(7, single_new.getLocalAdd()); 
+			stat.setString(8, single_new.getTitle()); 
+			stat.setString(9, single_new.getSourceType());
+			stat.setString(10, single_new.getIsExternal());
+			stat.setString(11, single_new.getIsInteresting());
+			stat.setInt(12, single_new.getGroupNum());
+			stat.setString(13, single_new.getTags());
+			stat.setDouble(14, single_new.getWidths());
+			stat.setDouble(15, single_new.getHeights());
+			stat.setString(16, single_new.getIssues());
+			stat.setString(17, single_new.getDate());
+			stat.setString(18, single_new.getKeyword());
+
+			stat.execute();
+			
+		
+
+	    }
+	 
+	    return existed;
 	}
+	
 	
 	
 	
@@ -239,6 +255,12 @@ public class MysqlDatabase {
 		 * test by lg
 		 */
 		MysqlDatabase mdb=new MysqlDatabase();
-		mdb.rankTopItems(10);
+		ArrayList<MovieItem> miList=mdb.batchsearchMovieDataFromMysql();
+		for(MovieItem mi:miList)
+		{
+			for(String s:mi.get_actor_list())
+				System.out.println(s);
+			
+		}
 	}
 }

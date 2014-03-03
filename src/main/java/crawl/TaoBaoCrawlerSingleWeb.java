@@ -1,6 +1,7 @@
 package crawl;
 
 
+import java.awt.image.BufferedImage;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 
@@ -10,6 +11,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import javax.imageio.ImageIO;
 
 
 
@@ -25,6 +28,8 @@ import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.ThreadedRefreshHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
+import entity.ImageItem;
 
 public class TaoBaoCrawlerSingleWeb{
 
@@ -98,7 +103,7 @@ public class TaoBaoCrawlerSingleWeb{
 	}
 
 	
-	public static String storeSingleImage(String urlLink, String winPath,String outpath,int imageNameId) throws IOException
+	public static ImageItem storeSingleImage(String urlLink, String winPath,String outpath,int imageNameId) throws IOException
 	{
 		String extension = urlLink.substring(urlLink.lastIndexOf('.'));
 		URL img = new URL(urlLink);
@@ -107,6 +112,7 @@ public class TaoBaoCrawlerSingleWeb{
 		conn.setReadTimeout(URL_READ_TIMEOUT);
 		InputStream in = null;
 		in = conn.getInputStream();
+		
 		DataInputStream dataInputStream = null;
 		DataOutputStream out = null;
 		String filename = String.valueOf(imageNameId++)+extension;
@@ -124,7 +130,21 @@ public class TaoBaoCrawlerSingleWeb{
 		out.close();/*后面三行为关闭输入输出流以及网络资源的固定格式*/
 		dataInputStream.close();
 		
-		return returnPath;
+		
+		
+		HttpURLConnection connImage = (HttpURLConnection)img.openConnection();
+		conn.setConnectTimeout(URL_CONNECT_TIMEOUT);
+		conn.setReadTimeout(URL_READ_TIMEOUT);
+		BufferedImage image = ImageIO.read(connImage.getInputStream());
+		
+		ImageItem item=new ImageItem();
+		System.out.println(returnPath);
+		System.out.println(image.getWidth());
+		System.out.println(image.getHeight());
+		item.setPath(returnPath);
+		item.setWidth(image.getWidth());
+		item.setHeight(image.getHeight());
+		return item;
 	}
 		
 	

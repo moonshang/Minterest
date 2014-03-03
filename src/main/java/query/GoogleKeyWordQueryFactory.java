@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class KeyWordQueryFactory {
+public class GoogleKeyWordQueryFactory {
 
 	/**
 	 * @param args
@@ -14,7 +14,7 @@ public class KeyWordQueryFactory {
 	public static void main(String[] args) 
 	{
 		String queryFile="./Lex";
-		KeyWordQueryFactory qf=new KeyWordQueryFactory(queryFile);
+		GoogleKeyWordQueryFactory qf=new GoogleKeyWordQueryFactory(queryFile);
 		
 		for(String s:qf.getQuery())
 		{
@@ -23,13 +23,13 @@ public class KeyWordQueryFactory {
 
 	}
 private  ArrayList<String> query=null;
-	public  KeyWordQueryFactory()
+	public  GoogleKeyWordQueryFactory()
 	{
 		if(query==null)
 			query= new ArrayList<String>();
 	}
 	
-	public  KeyWordQueryFactory(String queryFolder)
+	public  GoogleKeyWordQueryFactory(String queryFolder)
 	{
 		if(query==null)
 		{

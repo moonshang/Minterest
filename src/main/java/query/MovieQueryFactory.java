@@ -5,6 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import database.MysqlDatabase;
+import entity.MovieItem;
 
 public class MovieQueryFactory {
 
@@ -13,56 +17,34 @@ public class MovieQueryFactory {
 	 */
 	public static void main(String[] args) 
 	{
-		String movieFile="./movieList";
-		MovieQueryFactory qf=new MovieQueryFactory(movieFile);
-		
-		for(String s:qf.getQuery())
-		{
-			System.out.println(s);
-		}
+		//String source="./movieList";
+		MovieQueryFactory qf=new MovieQueryFactory();
+
 
 	}
-private  ArrayList<String> query=null;
+private  HashMap<String, String> query=null;
 	public  MovieQueryFactory()
 	{
 		if(query==null)
-			query= new ArrayList<String>();
-	}
-	
-	public  MovieQueryFactory(String movieFolder)
-	{
-		if(query==null)
+			query= new HashMap<String, String>();
+		try
 		{
-			query=new ArrayList<String>();
-			BufferedReader readerMovie = null;
-			try {
-				readerMovie = new BufferedReader(new FileReader(movieFolder));
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			String movieName="";
-		    try {
-				while((movieName=readerMovie.readLine())!=null)
+			MysqlDatabase md=new MysqlDatabase();
+			ArrayList<MovieItem> miList=md.batchsearchMovieDataFromMysql();
+			for(MovieItem mi:miList)
 				{
-					String s=movieName;
-					query.add(s);
+				query.put(mi.get_movie_name().substring(0,mi.get_movie_name().indexOf("(")),mi.get_movie_id());
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-						
-			try {
-				readerMovie.close();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
 		}
 	}
 	
-	public ArrayList<String> getQuery()
+
+	
+	public HashMap<String,String> getQuery()
 	{
 		return query;
 	}

@@ -1,10 +1,13 @@
 package main;
 
 
+import java.io.FileInputStream;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import crawl.GoogleCrawler;
+import crawl.TaoBaoCrawler;
 
 
 
@@ -21,31 +24,29 @@ public class MessageListenerDeamon extends Thread
     }
     
     @Override
-    public void run()
+    public void run() 
     {
         // 获取消息请求检查时间间隔，单位：秒
-        //int queueMessageCheckDuration = 24*60*60*1000;
+     
     
    //     try {
         	
-			//prop.load(new FileInputStream("D:\\EclipseWorkspace\\ContentDiary\\src\\main\\resources\\Config.properties"));
-			
-			//System.out.println("loading movies");
-//        String duration=prop.get("Duration").toString();
+    long	queueMessageCheckDuration=24*60*60*1000;
         
-        	try {
-				GoogleCrawler.crawler();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        	//System.out.println("loading movies");
+        //   String duration=prop.get("Duration").toString();
+			new TaoBaoCrawler().crawl();
    
-//            while (true)
-//            {
-//
-//            
-//                Thread.sleep(queueMessageCheckDuration * 2);
-//            }
+            while (true)
+            {
+                try {
+					Thread.sleep(queueMessageCheckDuration * 7);
+					System.out.println("Sleeping for next task start");
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
 //        }
 //        catch (InterruptedException e)
 //        {
