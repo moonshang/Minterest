@@ -1,0 +1,13 @@
+2014-03-04 09:31:43 WARN  HttpMethodBase:1656 - Cookie rejected: "_tb_token_=JKtFhQAeH1n". Illegal domain attribute ".taobao.com". Domain of origin: "jx.tmall.com"
+2014-03-04 09:31:58 WARN  TargetImageSelector:58 - No image found by image matching program...Maybe caused by small image size, or ioexception
+2014-03-04 09:32:01 WARN  HttpMethodBase:1656 - Cookie rejected: "U_TRS1=00000014.cc7d130f.53160ca8.97ce8ef4". Illegal domain attribute ".sina.com.cn". Domain of origin: "widget.weibo.com"
+2014-03-04 09:32:01 WARN  HttpMethodBase:1656 - Cookie rejected: "U_TRS2=00000014.cc87130f.53160ca8.5cbfd1ac". Illegal domain attribute ".sina.com.cn". Domain of origin: "widget.weibo.com"
+2014-03-04 09:32:27 WARN  TargetImageSelector:58 - No image found by image matching program...Maybe caused by small image size, or ioexception
+2014-03-04 09:32:33 WARN  ImageCollectorUtils:48 - main	IOException:url=http://img.tongji.linezing.com/1663546/tongji.gif	http://img.tongji.linezing.com/1663546/tongji.gif
+2014-03-04 09:32:49 WARN  TargetImageSelector:58 - No image found by image matching program...Maybe caused by small image size, or ioexception
+2014-03-04 09:33:56 WARN  HttpMethodBase:1656 - Cookie rejected: "_tb_token_=wAsFzJnfH1n". Illegal domain attribute ".taobao.com". Domain of origin: "jx.tmall.com"
+2014-03-04 09:34:52 WARN  HttpMethodBase:1656 - Cookie rejected: "_tb_token_=2etFr87gH1n". Illegal domain attribute ".taobao.com". Domain of origin: "jx.tmall.com"
+2014-03-04 09:35:49 WARN  HttpMethodBase:1656 - Cookie rejected: "_tb_token_=VetFCsLgH1n". Illegal domain attribute ".taobao.com". Domain of origin: "jx.tmall.com"
+2014-03-04 09:39:46 WARN  ImageCollectorUtils:45 - main	Read source timeout:http://img3.fdc.com.cn/cms/images/news_img/newsfdc/n3y_011.gif	Read timed out
+2014-03-04 09:40:31 WARN  HttpMethodBase:1656 - Cookie rejected: "_tb_token_=zMtFfpNgH1n". Illegal domain attribute ".taobao.com". Domain of origin: "jx.tmall.com"
+2014-03-04 09:42:31 WARN  HttpMethodBase:1656 - Cookie rejected: "_tb_token_=EDsFIMxhH1n". Illegal domain attribute ".taobao.com". Domain of origin: "jx.tmall.com"

@@ -177,6 +177,30 @@ public class MysqlDatabase {
 		 return taobaoKeywords;
 		
 	}
+	
+	/**
+	 * Not finished yet.
+	 * @return
+	 */
+	public ArrayList<String> getBlockingSites(){
+		ArrayList<String> taobaoKeywords = new ArrayList<String>();
+
+		String sql = "SELECT * FROM Minterest.Blocking";
+		PreparedStatement stmt;
+		try {
+			stmt = conn.clientPrepareStatement(sql);
+			ResultSet rs = stmt.executeQuery(sql);
+			while (rs.next()) {
+				taobaoKeywords.add(rs.getString("query"));
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return taobaoKeywords;
+	}
 
 	/*
 	 * true: 插入的数据，数据库里面并不存在
